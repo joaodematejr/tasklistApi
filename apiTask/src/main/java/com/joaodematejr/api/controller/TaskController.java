@@ -1,5 +1,6 @@
 package com.joaodematejr.api.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -41,6 +42,11 @@ public class TaskController {
 	// CRIAR 
 	@PostMapping
 	public Task create(@Valid @RequestBody Task task) {
+		if (task.getStatus() == true) {
+			task.setDatesConclusion(new Date());
+		} else {
+			task.setDatesConclusion(null);
+		}
 	    return taskRepository.save(task);
 	}
 	
@@ -53,7 +59,15 @@ public class TaskController {
 
 		task.setTitle(taskDetails.getTitle());
 		task.setDescription(taskDetails.getDescription());
-
+		task.setStatus(taskDetails.getStatus());
+		
+		if (task.getStatus() == true) {
+			task.setDatesConclusion(new Date());
+		} else {
+			task.setDatesConclusion(null);
+		}
+		
+		
 		Task updatedTask = taskRepository.save(task);
 		return updatedTask;
 	}

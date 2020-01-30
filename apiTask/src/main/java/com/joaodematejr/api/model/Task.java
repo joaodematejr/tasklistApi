@@ -38,9 +38,7 @@ public class Task implements Serializable {
     @LastModifiedDate
     private Date datesEdition;
     
-    
     private Date datesRemoval;
-    
     
     private Date datesConclusion;
 
